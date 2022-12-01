@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicles-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: micro-vehicles
+  template:
+    metadata:
+      labels:
+        app: micro-vehicles
+    spec:
+      containers:
+        - image: mihoci10/rso-micro-vehicles:latest
+          name: micro-users
+          env:
+            - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
+              value: jdbc:postgresql://mouse.db.elephantsql.com/ngqftspo
+            - name: KUMULUZEE_DATASOURCES0_USERNAME
+              value: ngqftspo
+            - name: KUMULUZEE_DATASOURCES0_PASSWORD
+              value: WWlHHEMBct5haUNfaHnOCh9zxt4o_E-B
+          ports:
+            - containerPort: 8080
+              name: server
+              protocol: TCP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: micro-vehicles
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: server
+  selector:
+    app: micro-vehicles
