@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: vehicles-deployment
+  namespace: ingress-nginx
 spec:
   replicas: 1
   selector:
@@ -35,6 +36,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: micro-vehicles
+  namespace: ingress-nginx
 spec:
   type: LoadBalancer
   ports:
