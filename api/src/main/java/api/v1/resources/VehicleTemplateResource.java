@@ -11,6 +11,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import payload.VehiclePayload;
+import payload.VehicleTemplatePayload;
 import services.beans.VehicleBean;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -24,10 +25,10 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @ApplicationScoped
-@Path("vehicles")
+@Path("templates")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class VehicleResource {
+public class VehicleTemplateResource {
 
     private Logger log = Logger.getLogger(VehicleResource.class.getName());
 
@@ -37,31 +38,31 @@ public class VehicleResource {
     @Context
     protected UriInfo uriInfo;
 
-    @Operation(description = "Get all vehicles data.", summary = "Get all vehicles")
+    @Operation(description = "Get all vehicle templates.", summary = "Get all templates")
     @APIResponses({
             @APIResponse(responseCode = "200",
-                    description = "List of vehicles data",
-                    content = @Content(schema = @Schema(implementation = VehicleDetails.class, type = SchemaType.ARRAY)),
+                    description = "List of templates",
+                    content = @Content(schema = @Schema(implementation = VehicleTemplateDetails.class, type = SchemaType.ARRAY)),
                     headers = {@Header(name = "X-Total-Count", description = "Number of objects in list")}
             )})
     @GET
-    public Response getVehicles() {
+    public Response getTemplates() {
 
-        List<VehicleDetails> vehicleData = vehicleBean.getAllVehicles();
+        List<VehicleTemplateDetails> templatesData = vehicleBean.getAllTemplates();
 
-        return Response.status(Response.Status.OK).entity(vehicleData).build();
+        return Response.status(Response.Status.OK).entity(templatesData).build();
     }
 
-    @Operation(description = "Add a new vehicle", summary = "Add vehicle")
+    @Operation(description = "Add a vehicle template", summary = "Add vehicle template")
     @Path("add")
     @POST
-    public Response addVehicle(@RequestBody(
+    public Response addVehicleTemplate(@RequestBody(
             description = "Object with segment data.",
             required = true, content = @Content(
-            schema = @Schema(implementation = VehiclePayload.class))) VehiclePayload vehiclePayload) {
+            schema = @Schema(implementation = VehicleTemplatePayload.class))) VehicleTemplatePayload vehicleTemplatePayload) {
 
         try{
-            vehicleBean.addVehicle(vehiclePayload);
+            vehicleBean.addVehicleTemplate(vehicleTemplatePayload);
         }
         catch (Exception e){
             System.out.println(e);

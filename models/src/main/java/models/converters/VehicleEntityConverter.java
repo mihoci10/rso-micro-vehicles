@@ -12,7 +12,7 @@ public class VehicleEntityConverter {
         dto.setBatteryPercent(entity.getBatteryPercent());
         dto.setKilometersDriven(entity.getKilometersDriven());
         dto.setOwnerId(entity.getOwnerId());
-        dto = VehicleTemplateConverter.toDto(dto, entity.getTemplate());
+        dto = VehicleTemplateEntityConverter.toDto(dto, entity.getTemplate());
 
         return dto;
     }
@@ -24,7 +24,7 @@ public class VehicleEntityConverter {
         entity.setBatteryPercent(dto.getBatteryPercent());
         entity.setKilometersDriven(dto.getKilometersDriven());
         entity.setOwnerId(dto.getOwnerId());
-        entity.setTemplate(VehicleTemplateConverter.toEntity(dto));
+        entity.setTemplate(VehicleTemplateEntityConverter.toEntity(dto));
 
         return entity;
     }

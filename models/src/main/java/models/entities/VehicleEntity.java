@@ -19,7 +19,7 @@ public class VehicleEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "\"templateId\"", nullable = false)
-    private VehicleTemplate template;
+    private VehicleTemplateEntity template;
 
     @Column(name = "\"ownerId\"", nullable = false)
     private Integer ownerId;
@@ -54,11 +54,11 @@ public class VehicleEntity {
         this.ownerId = ownerId;
     }
 
-    public VehicleTemplate getTemplate() {
+    public VehicleTemplateEntity getTemplate() {
         return template;
     }
 
-    public void setTemplate(VehicleTemplate template) {
+    public void setTemplate(VehicleTemplateEntity template) {
         this.template = template;
     }
 

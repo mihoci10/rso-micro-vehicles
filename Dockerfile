@@ -18,5 +18,5 @@ WORKDIR /app
 
 COPY --from=build ./app/api/target/rso-vehicle-api-1.0-SNAPSHOT.jar /app
 
-EXPOSE 8080
+EXPOSE 8081
 CMD ["java", "-jar", "rso-vehicle-api-1.0-SNAPSHOT.jar"]

@@ -4,12 +4,19 @@ kumuluzee:
     name: dev
   version: 1.0.0
   server:
-    base-url: http://localhost:8080
+    base-url: http://localhost:8081
     http:
-      port: 8080
+      port: 8081
   datasources:
     - jndi-name: jdbc/VEHICLE-DS
       connection-url: jdbc:postgresql://localhost:5432/microserviceDB
       username: postgres
       password: docker
       max-pool-size: 20
+
+  config:
+    consul:
+        agent: 'http://localhost:8500'
+
+rest-properties:
+  maintenance-mode: false

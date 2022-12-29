@@ -4,10 +4,10 @@
         <non-jta-data-source>jdbc/VEHICLE-DS</non-jta-data-source>
 
         <class>models.entities.VehicleEntity</class>
-        <class>models.entities.VehicleTemplate</class>
+        <class>models.entities.VehicleTemplateEntity</class>
 
         <class>models.converters.VehicleEntityConverter</class>
-        <class>models.converters.VehicleTemplateConverter</class>
+        <class>models.converters.VehicleTemplateEntityConverter</class>
 
         <class>models.converters.InstantAtributeConverter</class>
 

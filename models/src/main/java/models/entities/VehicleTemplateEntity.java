@@ -4,7 +4,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "vehicleTemplate")
-public class VehicleTemplate {
+@NamedQueries(value =
+        {
+                @NamedQuery(name = "VehicleTemplateEntity.getAll",
+                        query = "SELECT u FROM VehicleTemplateEntity u")
+        })
+public class VehicleTemplateEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

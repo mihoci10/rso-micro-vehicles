@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - image: mihoci10/rso-micro-vehicles:latest
-          name: micro-users
+          name: micro-vehicles
           env:
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
               value: jdbc:postgresql://mouse.db.elephantsql.com/ngqftspo
@@ -22,8 +22,10 @@ spec:
               value: ngqftspo
             - name: KUMULUZEE_DATASOURCES0_PASSWORD
               value: WWlHHEMBct5haUNfaHnOCh9zxt4o_E-B
+            - name: KUMULUZEE_CONFIG_CONSUL_AGENT
+              value: 'http://10.244.0.14:8500'
           ports:
-            - containerPort: 8080
+            - containerPort: 8081
               name: server
               protocol: TCP
 
@@ -36,7 +38,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 8080
+    - port: 8081
       protocol: TCP
       targetPort: server
   selector:
