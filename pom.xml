@@ -71,6 +71,12 @@
             </dependency>
 
             <dependency>
+                <groupId>com.kumuluz.ee.config</groupId>
+                <artifactId>kumuluzee-config-consul</artifactId>
+                <version>${kumuluzee-config.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.example</groupId>
                 <artifactId>rso-vehicle-api</artifactId>
                 <version>${project.version}</version>
