@@ -41,6 +41,14 @@ public class VehicleBean {
 
         return resultList.stream().map(VehicleEntityConverter::toDto).collect(Collectors.toList());
     }
+
+    public VehicleDetails getVehicle(Integer vehicleId) {
+
+        VehicleEntity vehicleEntity = em.find(VehicleEntity.class, vehicleId);
+
+        return VehicleEntityConverter.toDto(vehicleEntity);
+    }
+
     public List<VehicleTemplateDetails> getAllTemplates(){
         List<VehicleTemplateEntity> resultList = null;
         try{

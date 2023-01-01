@@ -7,6 +7,7 @@ import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
@@ -50,6 +51,27 @@ public class VehicleResource {
         List<VehicleDetails> vehicleData = vehicleBean.getAllVehicles();
 
         return Response.status(Response.Status.OK).entity(vehicleData).build();
+    }
+
+    @Operation(description = "Get specific vehicle data.", summary = "Get vehicle data")
+    @APIResponses({
+            @APIResponse(responseCode = "200",
+                    description = "Vehicle data",
+                    content = @Content(
+                            schema = @Schema(implementation = VehicleDetails.class))
+            )})
+    @GET
+    @Path("/{vehicleId}")
+    public Response getImageMetadata(@Parameter(description = "Vehicle ID.", required = true)
+                                     @PathParam("vehicleId") Integer vehicleId) {
+
+        VehicleDetails vehicleDetails = vehicleBean.getVehicle(vehicleId);
+
+        if (vehicleDetails == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        return Response.status(Response.Status.OK).entity(vehicleDetails).build();
     }
 
     @Operation(description = "Add a new vehicle", summary = "Add vehicle")

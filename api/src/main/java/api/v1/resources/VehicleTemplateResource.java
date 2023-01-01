@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 @Consumes(MediaType.APPLICATION_JSON)
 public class VehicleTemplateResource {
 
-    private Logger log = Logger.getLogger(VehicleResource.class.getName());
+    private Logger log = Logger.getLogger(VehicleTemplateResource.class.getName());
 
     @Inject
     private VehicleBean vehicleBean;
