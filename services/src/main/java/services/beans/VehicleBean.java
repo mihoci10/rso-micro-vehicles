@@ -49,6 +49,21 @@ public class VehicleBean {
         return VehicleEntityConverter.toDto(vehicleEntity);
     }
 
+    public List<VehicleDetails> getUserVehicles(Integer userId) {
+        List<VehicleEntity> resultList = null;
+        try{
+            TypedQuery<VehicleEntity> query = em.createNamedQuery("VehicleEntity.getOfUser", VehicleEntity.class)
+                    .setParameter("ownerId", userId);
+
+            resultList = query.getResultList();
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+        return resultList.stream().map(VehicleEntityConverter::toDto).collect(Collectors.toList());
+    }
+
     public List<VehicleTemplateDetails> getAllTemplates(){
         List<VehicleTemplateEntity> resultList = null;
         try{

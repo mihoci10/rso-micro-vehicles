@@ -7,7 +7,9 @@ import javax.persistence.*;
 @NamedQueries(value =
 {
 @NamedQuery(name = "VehicleEntity.getAll",
-        query = "SELECT u FROM VehicleEntity u")
+        query = "SELECT u FROM VehicleEntity u"),
+@NamedQuery(name = "VehicleEntity.getOfUser",
+        query = "SELECT u FROM VehicleEntity u WHERE u.ownerId = :ownerId")
 })
 public class VehicleEntity {
 

@@ -74,6 +74,23 @@ public class VehicleResource {
         return Response.status(Response.Status.OK).entity(vehicleDetails).build();
     }
 
+    @Operation(description = "Get specific user vehicles data.", summary = "Get user vehicles data")
+    @APIResponses({
+            @APIResponse(responseCode = "200",
+                    description = "Vehicles data",
+                    content = @Content(
+                            schema = @Schema(implementation = VehicleDetails.class, type = SchemaType.ARRAY))
+            )})
+    @GET
+    @Path("/ofuser/{userId}")
+    public Response getUsersVehicles(@Parameter(description = "User ID.", required = true)
+                                     @PathParam("userId") Integer userId) {
+
+        List<VehicleDetails> vehicleDetails = vehicleBean.getUserVehicles(userId);
+
+        return Response.status(Response.Status.OK).entity(vehicleDetails).build();
+    }
+
     @Operation(description = "Add a new vehicle", summary = "Add vehicle")
     @Path("add")
     @POST
