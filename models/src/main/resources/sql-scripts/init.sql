@@ -1,2 +1,2 @@
-INSERT INTO public.VehicleTemplate(id, model, manufacturer, "batteryCapacity", efficiency) VALUES (0, 'Model 3 Standard Range', 'Tesla', 40000, 242);
-INSERT INTO public.Vehicle(id, "templateId", "ownerId", "batteryPercent", "kilometersDriven") VALUES (0, 0, 0, 500, 0);
+INSERT INTO public.VehicleTemplate(model, manufacturer, "batteryCapacity", efficiency) VALUES ('Model 3 Standard Range', 'Tesla', 40000, 0.5);
+INSERT INTO public.Vehicle("templateId", "ownerId", "batteryPercent", "kilometersDriven") VALUES (1, 0, 1, 0);

@@ -8,6 +8,7 @@ import models.entities.VehicleEntity;
 import models.entities.VehicleTemplateEntity;
 import payload.VehiclePayload;
 import payload.VehicleTemplatePayload;
+import payload.VehicleUpdatePayload;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Model;
@@ -125,6 +126,29 @@ public class VehicleBean {
             throw e;
         }
 
+    }
+
+    public Double updateVehicle(VehicleUpdatePayload vehicleUpdatePayload) {
+
+        try{
+            beginTx();
+
+            VehicleEntity vehicleEntity = em.find(VehicleEntity.class, vehicleUpdatePayload.getVehicleId());
+
+            double currKWH = vehicleEntity.getBatteryPercent() * vehicleEntity.getTemplate().getBatteryCapacity();
+            double usedKWH = ((vehicleUpdatePayload.getMetersTraveled() / vehicleUpdatePayload.getSecondsDuration())
+                    * vehicleEntity.getTemplate().getEfficiency());
+
+            vehicleEntity.setKilometersDriven(vehicleEntity.getKilometersDriven() + (vehicleUpdatePayload.getMetersTraveled()/1000));
+            vehicleEntity.setBatteryPercent((currKWH - usedKWH) / vehicleEntity.getTemplate().getBatteryCapacity());
+
+            commitTx();
+            return usedKWH;
+        }catch (Exception e){
+            rollbackTx();
+
+            throw e;
+        }
     }
 
     private void beginTx() {

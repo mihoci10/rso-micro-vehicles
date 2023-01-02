@@ -12,6 +12,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import payload.VehiclePayload;
+import payload.VehicleUpdatePayload;
 import services.beans.VehicleBean;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -109,5 +110,30 @@ public class VehicleResource {
         }
 
         return Response.status(Response.Status.OK).build();
+    }
+
+    @Operation(description = "Update vehicle data", summary = "Update vehicle")
+    @Path("update")
+    @APIResponses({
+            @APIResponse(responseCode = "200",
+                    description = "kWh",
+                    content = @Content(
+                            schema = @Schema(implementation = Double.class)))})
+    @POST
+    public Response updateVehicle(@RequestBody(
+            description = "Object with geo stat data.",
+            required = true, content = @Content(
+            schema = @Schema(implementation = VehicleUpdatePayload.class))) VehicleUpdatePayload vehicleUpdatePayload) {
+
+        try{
+            Double usedKWH = vehicleBean.updateVehicle(vehicleUpdatePayload);
+
+            return Response.status(Response.Status.OK).entity(usedKWH).build();
+        }
+        catch (Exception e){
+            System.out.println(e);
+
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
     }
 }
