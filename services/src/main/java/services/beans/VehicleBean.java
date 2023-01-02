@@ -9,6 +9,7 @@ import models.entities.VehicleTemplateEntity;
 import payload.VehiclePayload;
 import payload.VehicleTemplatePayload;
 import payload.VehicleUpdatePayload;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Model;
@@ -128,6 +129,7 @@ public class VehicleBean {
 
     }
 
+    @Timed
     public Double updateVehicle(VehicleUpdatePayload vehicleUpdatePayload) {
 
         try{

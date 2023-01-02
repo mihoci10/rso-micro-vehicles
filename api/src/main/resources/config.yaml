@@ -13,6 +13,15 @@ kumuluzee:
       username: postgres
       password: docker
       max-pool-size: 20
+  health:
+    checks:
+      data-source-health-check:
+        type: liveness
+        jndi-name: jdbc/VEHICLE-DS
+    metrics:
+      web-instrumentation:
+        - name: images-endpoint
+          url-pattern: /v1/vehicles/*
 
   config:
     consul:
