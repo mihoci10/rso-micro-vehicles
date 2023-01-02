@@ -136,7 +136,9 @@ public class VehicleBean {
             VehicleEntity vehicleEntity = em.find(VehicleEntity.class, vehicleUpdatePayload.getVehicleId());
 
             double currKWH = vehicleEntity.getBatteryPercent() * vehicleEntity.getTemplate().getBatteryCapacity();
-            double usedKWH = ((vehicleUpdatePayload.getMetersTraveled() / vehicleUpdatePayload.getSecondsDuration())
+            double usedKWH = 0;
+            if (vehicleUpdatePayload.getSecondsDuration() > 0)
+                usedKWH = ((vehicleUpdatePayload.getMetersTraveled() / vehicleUpdatePayload.getSecondsDuration())
                     * vehicleEntity.getTemplate().getEfficiency());
 
             vehicleEntity.setKilometersDriven(vehicleEntity.getKilometersDriven() + (vehicleUpdatePayload.getMetersTraveled()/1000));
